@@ -1,0 +1,35 @@
+.card-img-top {
+    height: 220px;
+    object-fit: cover;
+}
+
+/* Modo Alto Contraste */
+body.alto-contraste {
+    background-color: #000000 !important;
+    color: #FFFF00 !important;
+}
+
+body.alto-contraste .card,
+body.alto-contraste .navbar,
+body.alto-contraste header,
+body.alto-contraste footer,
+body.alto-contraste .bg-light {
+    background-color: #1a1a1a !important;
+    color: #FFFF00 !important;
+    border: 1px solid #FFFF00 !important;
+}
+
+body.alto-contraste .btn {
+    background-color: #FFFF00 !important;
+    color: #000000 !important;
+    font-weight: bold;
+    border: 1px solid #FFFFFF !important;
+}
+
+body.alto-contraste a,
+body.alto-contraste .nav-link,
+body.alto-contraste .card-title,
+body.alto-contraste h1,
+body.alto-contraste h2 {
+    color: #FFFF00 !important;
+}
