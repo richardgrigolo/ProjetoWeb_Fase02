@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PetShop Golden Shower - Fase 2</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- CSS Customizado -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- CABEÇALHO -->
+    <header class="bg-dark text-white p-2">
+        <div class="container d-flex justify-content-between align-items-center">
+            <span id="saudacao-temporal" class="fw-bold"></span>
+            <button id="btn-contraste" class="btn btn-outline-light btn-sm" aria-label="Alternar Modo de Alto Contraste">Alto Contraste</button>
+        </div>
+    </header>
+
+    <!-- BANNER E LOGO -->
+    <div class="bg-light py-3 border-bottom text-center">
+        <div class="container">
+            <img src="./imagens/Logo.png" alt="Logo PetShop Golden Shower" class="img-fluid mb-2" style="max-width: 300px;">
+            <h1 class="h3 mb-1">PetShop Golden Shower</h1>
+            <p class="text-muted mb-2">Pet, banho e tosa especializado em Golden Retriever.</p>
+            <a href="cadastro.html" class="btn btn-warning text-dark fw-bold me-2">Cadastrar Cliente / Pet</a>
+            <a href="agendamento.html" class="btn btn-outline-dark fw-bold">Agendar Banho</a>
+        </div>
+    </div>
+
+    <!-- NAVEGAÇÃO PRINCIPAL -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-warning sticky-top">
+        <div class="container">
+            <a class="navbar-brand text-dark fw-bold" href="index.html">Golden Shower</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Alternar navegação">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto fw-semibold">
+                    <li class="nav-item"><a class="nav-link text-dark" href="#acessorios">Acessórios</a></li>
+                    <li class="nav-item"><a class="nav-link text-dark" href="#racoes">Rações</a></li>
+                    <li class="nav-item"><a class="nav-link text-dark" href="#higiene">Higiene</a></li>
+                    <li class="nav-item"><a class="nav-link text-dark" href="#servicos">Serviços</a></li>
+                    <li class="nav-item"><a class="nav-link text-dark btn btn-dark text-white px-3 ms-lg-2 fw-bold" href="cadastro.html">Cadastre-se</a></li>
+                    <li class="nav-item"><a class="nav-link text-dark btn btn-outline-dark px-3 ms-lg-2 fw-bold" href="agendamento.html">Agendar</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- CARROSSEL (3 SLIDES) -->
+    <div id="carouselGolden" class="carousel slide my-4 container" data-bs-ride="carousel" data-bs-interval="3000">
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carouselGolden" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#carouselGolden" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#carouselGolden" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        </div>
+        <div class="carousel-inner rounded shadow-sm">
+            <div class="carousel-item active">
+                <img src="./imagens/racao_adulto.jpg" class="d-block w-100" style="height: 350px; object-fit: cover;" alt="Rações SuperPremium em oferta">
+                <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-75 rounded p-2">
+                    <h5>Linha SuperPremium</h5>
+                    <p>Nutrição de alta performance para cães adultos e filhotes.</p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="./imagens/banho_e_tosa_transporte.jpg" class="d-block w-100" style="height: 350px; object-fit: cover;" alt="Serviço de tele-busca banho e tosa">
+                <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-75 rounded p-2">
+                    <h5>Serviço de Tele-busca</h5>
+                    <p>Buscamos e entregamos seu Golden Retriever com total conforto e segurança.</p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="./imagens/Femur.jpg" class="d-block w-100" style="height: 350px; object-fit: cover;" alt="Osso Natural Fêmur Bovino Desidratado">
+                <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-75 rounded p-2">
+                    <h5>Acessórios & Petiscos</h5>
+                    <p>Osso natural fêmur bovino desidratado, rico em cálcio para a saúde do seu pet.</p>
+                </div>
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselGolden" data-bs-slide="prev" aria-label="Anterior">
+            <span class="carousel-control-prev-icon"></span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselGolden" data-bs-slide="next" aria-label="Próximo">
+            <span class="carousel-control-next-icon"></span>
+        </button>
+    </div>
+
+    <!-- MAIN -->
+    <main class="container my-5">
+
+        <section id="acessorios" class="mb-5">
+            <h2 class="border-bottom pb-2 text-warning-emphasis">Acessórios</h2>
+            <div class="row g-4 mt-1">
+                <div class="col-md-6">
+                    <div class="card h-100 shadow-sm">
+                        <img src="./imagens/Femur.jpg" class="card-img-top" alt="Osso Natural Fêmur Bovino">
+                        <div class="card-body">
+                            <h3 class="card-title h5">Osso Natural</h3>
+                            <p class="card-text">Fêmur bovino desidratado, rico em cálcio.</p>
+                            <p class="fw-bold fs-5 text-success">R$ 49,90</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card h-100 shadow-sm">
+                        <img src="./imagens/coleira.jpg" class="card-img-top" alt="Coleira peitoral ajustável com guia">
+                        <div class="card-body">
+                            <h3 class="card-title h5">Coleira Ajustável com Guia</h3>
+                            <p class="card-text">Coleira peitoral ajustável.</p>
+                            <p class="fw-bold fs-5 text-success">R$ 209,00</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="racoes" class="mb-5">
+            <h2 class="border-bottom pb-2 text-warning-emphasis">Rações</h2>
+            <div class="row g-4 mt-1">
+                <div class="col-md-6">
+                    <div class="card h-100 shadow-sm">
+                        <img src="./imagens/racao_adulto.jpg" class="card-img-top" alt="Ração SuperPremium Adultos">
+                        <div class="card-body">
+                            <h3 class="card-title h5">Ração SuperPremium Cães Adultos Grande Porte 20,2kg</h3>
+                            <p class="card-text">Alimento completo e balanceado rico em proteínas e ômega 3 e 6.</p>
+                            <p class="fw-bold fs-5 text-success">R$ 759,90</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card h-100 shadow-sm">
+                        <img src="./imagens/racao_filhote.jpg" class="card-img-top" alt="Ração SuperPremium Filhotes">
+                        <div class="card-body">
+                            <h3 class="card-title h5">Ração SuperPremium Cães Filhotes 10,1kg</h3>
+                            <p class="card-text">Formulada para o controle do peso e crescimento saudável.</p>
+                            <p class="fw-bold fs-5 text-success">R$ 359,90</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="higiene" class="mb-5">
+            <h2 class="border-bottom pb-2 text-warning-emphasis">Produtos de Higiene e Limpeza</h2>
+            <div class="row g-4 mt-1">
+                <div class="col-md-6">
+                    <div class="card h-100 shadow-sm">
+                        <img src="./imagens/tapete_higienico.jpg" class="card-img-top" alt="Tapete Higiênico 30 Unidades">
+                        <div class="card-body">
+                            <h3 class="card-title h5">Tapete Higiênico (30 Unidades)</h3>
+                            <p class="card-text">Alta absorção com atrativo canino e abas adesivas para fixação.</p>
+                            <p class="fw-bold fs-5 text-success">R$ 99,90</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card h-100 shadow-sm">
+                        <img src="./imagens/lenco_higienico.jpg" class="card-img-top" alt="Pacote de Lenços Umidecidos">
+                        <div class="card-body">
+                            <h3 class="card-title h5">Lenço Umidecido</h3>
+                            <p class="card-text">Pacote de lenços umidecidos para pet.</p>
+                            <p class="fw-bold fs-5 text-success">R$ 29,90</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="servicos" class="mb-5">
+            <h2 class="border-bottom pb-2 text-warning-emphasis">Serviços Oferecidos</h2>
+            <div class="row g-4 mt-1">
+                <div class="col-md-6">
+                    <div class="card h-100 border-warning shadow-sm">
+                        <img src="./imagens/banho_e_tosa.jpg" class="card-img-top" alt="Banho e Tosa Simples">
+                        <div class="card-body">
+                            <h3 class="card-title h5">Banho e Tosa Simples (Sem Tele-busca)</h3>
+                            <p class="card-text">Inclui banho com produtos neutros, secagem, corte de unhas, higienização auricular e tosa higiênica. O tutor deve entregar e retirar o animal no local.</p>
+                            <p class="fw-bold fs-4 text-primary">R$ 110,00</p>
+                            <a href="agendamento.html" class="btn btn-outline-warning text-dark fw-bold w-100">Agendar este serviço</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card h-100 border-warning shadow-sm">
+                        <img src="./imagens/banho_e_tosa_transporte.jpg" class="card-img-top" alt="Banho e Tosa Completo com Tele-busca">
+                        <div class="card-body">
+                            <h3 class="card-title h5">Banho e Tosa Completo (Com Tele-busca)</h3>
+                            <p class="card-text">Inclui banho completo, tosa da raça/tesoura, escovação dental e o serviço de busca e entrega do pet na residência do tutor.</p>
+                            <p class="fw-bold fs-4 text-primary">R$ 150,00</p>
+                            <a href="agendamento.html" class="btn btn-outline-warning text-dark fw-bold w-100">Agendar este serviço</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- RODAPÉ -->
+    <footer id="contato" class="bg-dark text-white pt-4 pb-3">
+        <div class="container text-center text-md-start">
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <h5>PetShop Golden Shower</h5>
+                    <p class="mb-1">Especializado no cuidado e carinho que seu Golden Retriever merece.</p>
+                    <p class="small text-muted">&copy; 2026 PetShop Golden Shower. Todos os direitos reservados.</p>
+                </div>
+                <div class="col-md-6 mb-3 text-md-end">
+                    <p class="mb-1"><strong>Contato:</strong> contato@goldenshower.com.br | (51) 99999-9999</p>
+                    <p class="mb-0"><strong>Endereço:</strong> Av. Ipiranga, 6681 - Porto Alegre / RS</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>

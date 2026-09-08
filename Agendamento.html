@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agendamento - PetShop Golden Shower</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <header class="bg-dark text-white p-2">
+        <div class="container d-flex justify-content-between align-items-center">
+            <span id="saudacao-temporal" class="fw-bold"></span>
+            <button id="btn-contraste" class="btn btn-outline-light btn-sm" aria-label="Alternar Modo de Alto Contraste">Alto Contraste</button>
+        </div>
+    </header>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-warning sticky-top">
+        <div class="container">
+            <a class="navbar-brand text-dark fw-bold" href="index.html">Golden Shower</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Alternar navegação">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto fw-semibold">
+                    <li class="nav-item"><a class="nav-link text-dark" href="index.html">Início / Produtos</a></li>
+                    <li class="nav-item"><a class="nav-link text-dark fw-bold" href="cadastro.html">Cadastro</a></li>
+                    <li class="nav-item"><a class="nav-link text-dark fw-bold active" href="agendamento.html">Agendamento</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container my-5">
+        <section id="agendamento" class="card p-4 shadow-sm">
+            <h2 class="card-title mb-4 border-bottom pb-2">Agendamento de Serviços</h2>
+            <form id="form-agendamento">
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <label for="selectServico" class="form-label">Serviço Desejado *</label>
+                        <select class="form-select" id="selectServico" required>
+                            <option value="" selected disabled>Escolha o serviço...</option>
+                            <option value="Banho e Tosa Simples">Banho e Tosa Simples</option>
+                            <option value="Banho e Tosa Completo">Banho e Tosa Completo</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label class="form-label d-block">Modalidade de Atendimento *</label>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="modalidade" id="modEntrega" value="Sem Tele-busca" checked>
+                            <label class="form-check-label" for="modEntrega">Entregar na PetShop</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="modalidade" id="modTele" value="Com Tele-busca">
+                            <label class="form-check-label" for="modTele">Solicitar Tele-busca</label>
+                        </div>
+                    </div>
+
+                    <div class="col-12">
+                        <div class="alert alert-info d-flex justify-content-between align-items-center py-2 px-3 mb-0" role="alert">
+                            <span>Valor total do serviço:</span>
+                            <span id="valorServico" class="fw-bold fs-5 text-success">R$ 0,00</span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="dataAgendamento" class="form-label">Data *</label>
+                        <input type="date" class="form-control" id="dataAgendamento" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="horaAgendamento" class="form-label">Horário *</label>
+                        <input type="time" class="form-control" id="horaAgendamento" required>
+                    </div>
+
+                    <div class="col-12">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="aceitaTermos" required>
+                            <label class="form-check-label" for="aceitaTermos">
+                                Concordo com as regras de tolerância de horário do PetShop Golden Shower. *
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-success mt-4">Confirmar Agendamento</button>
+            </form>
+        </section>
+    </main>
+
+    <footer class="bg-dark text-white pt-4 pb-3">
+        <div class="container text-center text-md-start">
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <h5>PetShop Golden Shower</h5>
+                    <p class="mb-1">Especializado no cuidado e carinho que seu Golden Retriever merece.</p>
+                    <p class="small text-muted">&copy; 2026 PetShop Golden Shower. Todos os direitos reservados.</p>
+                </div>
+                <div class="col-md-6 mb-3 text-md-end">
+                    <p class="mb-1"><strong>Contato:</strong> contato@goldenshower.com.br | (51) 99999-9999</p>
+                    <p class="mb-0"><strong>Endereço:</strong> Av. Ipiranga, 6681 - Porto Alegre / RS</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>

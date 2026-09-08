@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro - PetShop Golden Shower</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <header class="bg-dark text-white p-2">
+        <div class="container d-flex justify-content-between align-items-center">
+            <span id="saudacao-temporal" class="fw-bold"></span>
+            <button id="btn-contraste" class="btn btn-outline-light btn-sm" aria-label="Alternar Modo de Alto Contraste">Alto Contraste</button>
+        </div>
+    </header>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-warning sticky-top">
+        <div class="container">
+            <a class="navbar-brand text-dark fw-bold" href="index.html">Golden Shower</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Alternar navegação">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto fw-semibold">
+                    <li class="nav-item"><a class="nav-link text-dark" href="index.html">Início / Produtos</a></li>
+                    <li class="nav-item"><a class="nav-link text-dark fw-bold active" href="cadastro.html">Cadastro</a></li>
+                    <li class="nav-item"><a class="nav-link text-dark fw-bold" href="agendamento.html">Agendamento</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container my-5">
+        <section id="cadastro" class="card p-4 shadow-sm">
+            <h2 class="card-title mb-4 border-bottom pb-2">Cadastro do Cliente e do Pet</h2>
+            <form id="form-cadastro">
+                <h4 class="text-secondary fs-5">Dados do Tutor</h4>
+                <div class="row g-3 mb-3">
+                    <div class="col-md-6">
+                        <label for="nomeCliente" class="form-label">Nome Completo *</label>
+                        <input type="text" class="form-control" id="nomeCliente" placeholder="Ex: Nome Completo" required>
+                    </div>
+                    <div class="col-md-3">
+                        <label for="cpfCliente" class="form-label">CPF *</label>
+                        <input type="text" class="form-control" id="cpfCliente" placeholder="000.000.000-00" required>
+                    </div>
+                    <div class="col-md-3">
+                        <label class="form-label d-block">Sexo *</label>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="sexoCliente" id="sexoM" value="M" required>
+                            <label class="form-check-label" for="sexoM">Masc.</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="sexoCliente" id="sexoF" value="F">
+                            <label class="form-check-label" for="sexoF">Fem.</label>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="emailCliente" class="form-label">E-mail *</label>
+                        <input type="email" class="form-control" id="emailCliente" placeholder="contato@dominio.com" required>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="telCliente" class="form-label">Telefone *</label>
+                        <input type="tel" class="form-control" id="telCliente" placeholder="(51) 99999-9999" required>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="endCliente" class="form-label">Endereço Completo *</label>
+                        <input type="text" class="form-control" id="endCliente" placeholder="Rua, Número, Bairro" required>
+                    </div>
+                </div>
+
+                <h4 class="text-secondary fs-5 mt-4">Dados do Pet</h4>
+                <div class="row g-3 mb-3">
+                    <div class="col-md-4">
+                        <label for="nomePet" class="form-label">Nome do Pet *</label>
+                        <input type="text" class="form-control" id="nomePet" placeholder="Ex: Minerva" required>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="racaPet" class="form-label">Raça *</label>
+                        <input type="text" class="form-control" id="racaPet" placeholder="Ex: Golden Retriever" required>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="idadePet" class="form-label">Idade (anos) *</label>
+                        <input type="number" class="form-control" id="idadePet" min="0" max="30" placeholder="Ex: 3" required>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-warning text-dark fw-bold mt-2">Cadastrar Cliente e Pet</button>
+            </form>
+        </section>
+    </main>
+
+    <footer class="bg-dark text-white pt-4 pb-3">
+        <div class="container text-center text-md-start">
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <h5>PetShop Golden Shower</h5>
+                    <p class="mb-1">Especializado no cuidado e carinho que seu Golden Retriever merece.</p>
+                    <p class="small text-muted">&copy; 2026 PetShop Golden Shower. Todos os direitos reservados.</p>
+                </div>
+                <div class="col-md-6 mb-3 text-md-end">
+                    <p class="mb-1"><strong>Contato:</strong> contato@goldenshower.com.br | (51) 99999-9999</p>
+                    <p class="mb-0"><strong>Endereço:</strong> Av. Ipiranga, 6681 - Porto Alegre / RS</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>
