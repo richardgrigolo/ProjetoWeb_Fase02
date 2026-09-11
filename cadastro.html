@@ -35,7 +35,11 @@
     <main class="container my-5">
         <section id="cadastro" class="card p-4 shadow-sm">
             <h2 class="card-title mb-4 border-bottom pb-2">Cadastro do Cliente e do Pet</h2>
-            <form id="form-cadastro">
+            
+            <!-- CONTÊINER ÚNICO PARA MENSAGENS -->
+            <div id="mensagem-feedback" class="d-none mb-3"></div>
+
+            <form id="form-cadastro" novalidate>
                 <h4 class="text-secondary fs-5">Dados do Tutor</h4>
                 <div class="row g-3 mb-3">
                     <div class="col-md-6">
@@ -110,5 +114,79 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="js/script.js"></script>
+
+    <script>
+        document.getElementById('form-cadastro').addEventListener('submit', function (event) {
+            // Impede recarregamento e cancela interferência de outros scripts JS
+            event.preventDefault();
+            event.stopImmediatePropagation();
+
+            const feedbackDiv = document.getElementById('mensagem-feedback');
+            
+            // Limpa mensagens anteriores
+            feedbackDiv.className = 'd-none mb-3';
+            feedbackDiv.innerHTML = '';
+
+            const erros = [];
+
+            // Obtenção dos valores limpos
+            const nomeCliente = document.getElementById('nomeCliente').value.trim();
+            const cpfCliente = document.getElementById('cpfCliente').value.trim();
+            const sexoCliente = document.querySelector('input[name="sexoCliente"]:checked');
+            const emailCliente = document.getElementById('emailCliente').value.trim();
+            const telCliente = document.getElementById('telCliente').value.trim();
+            const endCliente = document.getElementById('endCliente').value.trim();
+            const nomePet = document.getElementById('nomePet').value.trim();
+            const racaPet = document.getElementById('racaPet').value.trim();
+            const idadePet = document.getElementById('idadePet').value.trim();
+
+            // Validações individuais
+            if (!nomeCliente) erros.push("Por favor, preencha o campo <strong>Nome Completo</strong>.");
+            if (!cpfCliente) erros.push("Por favor, preencha o campo <strong>CPF</strong>.");
+            if (!sexoCliente) erros.push("Por favor, selecione a opção de <strong>Sexo</strong>.");
+            if (!emailCliente || !emailCliente.includes('@')) erros.push("Por favor, informe um <strong>E-mail</strong> válido.");
+            if (!telCliente) erros.push("Por favor, preencha o campo <strong>Telefone</strong>.");
+            if (!endCliente) erros.push("Por favor, preencha o campo <strong>Endereço Completo</strong>.");
+            if (!nomePet) erros.push("Por favor, preencha o campo <strong>Nome do Pet</strong>.");
+            if (!racaPet) erros.push("Por favor, preencha o campo <strong>Raça</strong>.");
+            if (!idadePet || idadePet < 0) erros.push("Por favor, informe uma <strong>Idade</strong> válida para o pet.");
+
+            // Se houver erros, exibe APENAS a lista vermelha e INTERROMPE
+            if (erros.length > 0) {
+                feedbackDiv.className = 'alert alert-danger mb-3';
+                feedbackDiv.innerHTML = `
+                    <h5 class="alert-heading fs-6 fw-bold mb-2">Por favor, corrija os seguintes campos:</h5>
+                    <ul class="mb-0 ps-3">
+                        ${erros.map(erro => `<li>${erro}</li>`).join('')}
+                    </ul>
+                `;
+                feedbackDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                return; // Bloqueia a gravação e a mensagem de sucesso
+            }
+
+            // Gravação no LocalStorage
+            const novoCadastro = {
+                nomeCliente: nomeCliente,
+                nomePet: nomePet,
+                cpf: cpfCliente,
+                email: emailCliente,
+                telefone: telCliente
+            };
+
+            let cadastrosExistentes = JSON.parse(localStorage.getItem('cadastrosPetshop')) || [];
+            cadastrosExistentes.push(novoCadastro);
+            localStorage.setItem('cadastrosPetshop', JSON.stringify(cadastrosExistentes));
+
+            // Exibe APENAS a mensagem verde de sucesso
+            feedbackDiv.className = 'alert alert-success mb-3';
+            feedbackDiv.innerHTML = `
+                <h5 class="alert-heading fs-6 fw-bold mb-1">🎉 Cadastro realizado com sucesso!</h5>
+                <p class="mb-0">Os dados de <strong>${nomeCliente}</strong> e do pet <strong>${nomePet}</strong> foram registrados. Você já pode realizar um <a href="agendamento.html" class="alert-link">agendamento aqui</a>.</p>
+            `;
+
+            document.getElementById('form-cadastro').reset();
+            feedbackDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        });
+    </script>
 </body>
 </html>
