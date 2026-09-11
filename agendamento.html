@@ -35,8 +35,22 @@
     <main class="container my-5">
         <section id="agendamento" class="card p-4 shadow-sm">
             <h2 class="card-title mb-4 border-bottom pb-2">Agendamento de Serviços</h2>
-            <form id="form-agendamento">
+            
+            <!-- CONTÊINER ÚNICO PARA MENSAGENS -->
+            <div id="mensagem-feedback" class="d-none mb-3"></div>
+
+            <form id="form-agendamento" novalidate>
                 <div class="row g-3">
+                    <div class="col-md-6">
+                        <label for="nomeTutorAgendamento" class="form-label">Nome Completo do Tutor *</label>
+                        <input type="text" class="form-control" id="nomeTutorAgendamento" placeholder="Ex: Nome Completo" required>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="nomePetAgendamento" class="form-label">Nome do Pet *</label>
+                        <input type="text" class="form-control" id="nomePetAgendamento" placeholder="Ex: Minerva" required>
+                    </div>
+
                     <div class="col-md-6">
                         <label for="selectServico" class="form-label">Serviço Desejado *</label>
                         <select class="form-select" id="selectServico" required>
@@ -107,5 +121,112 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="js/script.js"></script>
+
+    <script>
+        const selectServico = document.getElementById('selectServico');
+        const radiosModalidade = document.querySelectorAll('input[name="modalidade"]');
+        const valorServicoSpan = document.getElementById('valorServico');
+        const formAgendamento = document.getElementById('form-agendamento');
+        const feedbackDiv = document.getElementById('mensagem-feedback');
+        const inputData = document.getElementById('dataAgendamento');
+
+        // Bloqueia seleções de datas passadas no próprio calendário HTML5
+        const hojeISO = new Date().toISOString().split('T')[0];
+        inputData.setAttribute('min', hojeISO);
+
+        function calcularValor() {
+            let valorBase = 0;
+            const servico = selectServico.value;
+            const teleBusca = document.getElementById('modTele').checked;
+
+            if (servico === "Banho e Tosa Simples") valorBase = 110;
+            else if (servico === "Banho e Tosa Completo") valorBase = 150;
+
+            if (teleBusca && valorBase > 0) valorBase += 30;
+
+            valorServicoSpan.textContent = `R$ ${valorBase.toFixed(2).replace('.', ',')}`;
+        }
+
+        selectServico.addEventListener('change', calcularValor);
+        radiosModalidade.forEach(radio => radio.addEventListener('change', calcularValor));
+
+        formAgendamento.addEventListener('submit', function (event) {
+            // Impede recarregamento e cancela interferência de outros scripts JS
+            event.preventDefault();
+            event.stopImmediatePropagation();
+
+            // Reseta a caixa de feedback
+            feedbackDiv.className = 'd-none mb-3';
+            feedbackDiv.innerHTML = '';
+
+            const erros = [];
+            const nomeTutor = document.getElementById('nomeTutorAgendamento').value.trim();
+            const nomePet = document.getElementById('nomePetAgendamento').value.trim();
+            const servico = selectServico.value;
+            const data = inputData.value;
+            const hora = document.getElementById('horaAgendamento').value;
+            const termos = document.getElementById('aceitaTermos').checked;
+            const modalidadeSelecionada = document.querySelector('input[name="modalidade"]:checked').value;
+
+            // 1. PASSO: Valida campos não preenchidos
+            if (!nomeTutor) erros.push("Por favor, informe o <strong>Nome do Tutor</strong>.");
+            if (!nomePet) erros.push("Por favor, informe o <strong>Nome do Pet</strong>.");
+            if (!servico) erros.push("Por favor, selecione o <strong>Serviço Desejado</strong>.");
+            if (!data) {
+                erros.push("Por favor, informe a <strong>Data</strong> para o agendamento.");
+            } else if (data < hojeISO) {
+                erros.push("A <strong>Data do agendamento</strong> não pode ser anterior à data de hoje.");
+            }
+            if (!hora) erros.push("Por favor, informe o <strong>Horário</strong> desejado.");
+            if (!termos) erros.push("Você precisa concordar com as <strong>regras de tolerância de horário</strong>.");
+
+            // Se existirem erros de preenchimento ou data inválida, exibe a lista de erros
+            if (erros.length > 0) {
+                feedbackDiv.className = 'alert alert-danger mb-3';
+                feedbackDiv.innerHTML = `
+                    <h5 class="alert-heading fs-6 fw-bold mb-2">Por favor, corrija os seguintes itens:</h5>
+                    <ul class="mb-0 ps-3">
+                        ${erros.map(erro => `<li>${erro}</li>`).join('')}
+                    </ul>
+                `;
+                feedbackDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                return; // Impede avanço
+            }
+
+            // 2. PASSO: Verifica se existe o cadastro no LocalStorage
+            const cadastrosSalvos = JSON.parse(localStorage.getItem('cadastrosPetshop')) || [];
+            const cadastroEncontrado = cadastrosSalvos.some(cadastro => 
+                cadastro.nomeCliente.toLowerCase() === nomeTutor.toLowerCase() &&
+                cadastro.nomePet.toLowerCase() === nomePet.toLowerCase()
+            );
+
+            // Se não encontrou o cadastro, exibe o aviso vermelho e PARALISA
+            if (!cadastroEncontrado) {
+                feedbackDiv.className = 'alert alert-danger mb-3';
+                feedbackDiv.innerHTML = `
+                    <h5 class="alert-heading fs-6 fw-bold mb-1">Cadastro não localizado!</h5>
+                    <p class="mb-0">Não encontramos um cadastro ativo para o tutor <strong>"${nomeTutor}"</strong> e o pet <strong>"${nomePet}"</strong>. Por favor, faça o <a href="cadastro.html" class="alert-link">cadastro aqui</a> antes de agendar.</p>
+                `;
+                feedbackDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                return; // Impede confirmação
+            }
+
+            // 3. PASSO: Se tudo estiver correto, exibe a confirmação
+            feedbackDiv.className = 'alert alert-success mb-3';
+            feedbackDiv.innerHTML = `
+                <h5 class="alert-heading fs-6 fw-bold mb-1">📅 Agendamento confirmado com sucesso!</h5>
+                <p class="mb-0">
+                    Tutor: <strong>${nomeTutor}</strong> | Pet: <strong>${nomePet}</strong><br>
+                    Serviço: <strong>${servico}</strong> (${modalidadeSelecionada})<br>
+                    Data e Horário: <strong>${data.split('-').reverse().join('/')} às ${hora}</strong>.<br>
+                    Valor Total: <strong>${valorServicoSpan.textContent}</strong>.
+                </p>
+            `;
+
+            formAgendamento.reset();
+            valorServicoSpan.textContent = "R$ 0,00";
+            feedbackDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        });
+    </script>
 </body>
 </html>
